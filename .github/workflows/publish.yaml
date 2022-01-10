@@ -27,25 +27,10 @@ jobs:
         uses: mperezi/build-alfred-workflow@v1
         with:
           workflow_dir: src
-          exclude_patterns: '*.pyc *__pycache__/*'
+          exclude_patterns: 'README.md *.pyc *__pycache__/*'
 
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ steps.get-app-token.outputs.token }}
+      - name: Release
+        uses: softprops/action-gh-release@v1
         with:
-          tag_name: ${{ github.ref }}
-          release_name: ${{ github.ref }}
-          draft: false
-          prerelease: false
-
-      - name: Upload Alfred Workflow
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ steps.get-app-token.outputs.token }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ${{ steps.alfred_builder.outputs.workflow_file }}
-          asset_name: ${{ steps.alfred_builder.outputs.workflow_file }}
-          asset_content_type: application/zip
+          token: ${{ steps.get-app-token.outputs.token }}
+          files: ${{ steps.alfred_builder.outputs.workflow_file }}
