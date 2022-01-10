@@ -1,6 +1,8 @@
 [TMDB](https://www.themoviedb.org) search workflow for [Alfred 4](https://www.alfredapp.com)
 ==============================
 
+![Icon](icon.png)
+
 Setup
 -----
 This workflow requires a number of Python modules. These can be installed by running the following command from your terminal:
